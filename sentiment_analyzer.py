@@ -31,6 +31,13 @@ class Tools:
         date_obj = pd.to_datetime(date_string, format="%B %d, %Y at %I:%M%p").date()
         return date_obj
 
+    # filters the dataframe where only tweets that include a certain keyword will be put in the dataf
+    @staticmethod
+    def keyword_filter(df,keyword):
+
+        filtered_df  =
+        return filtered_df
+
 
 class SentimentAnalyzer(Tools):
     @staticmethod

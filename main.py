@@ -34,15 +34,28 @@ def main():
 
     name_tweet_score['Score'] = [sa.sentiment_processing(sa.tweet_formatter(tweet)) for tweet in name_tweet_score['Tweet']]
 
+    # keyword filter
+    keyword_filter = input("Add a keyword filter? 1) Yes 2) No ")
+    if keyword_filter == '1':
+        keyword = input("Keyword: ")
+        # check if keyword is included in the corpus
+
+        name_tweet_score = name_tweet_score.keyword_filter(name_tweet_score,keyword)
+
+
+    # visualisation
     data_visualisation = input("1) Sentiment Wheel, 2) Sentiment Over Time 3) User Ranking ")
 
-    # creating a sentiment wheel
     if data_visualisation == '1':
+        # creating sentiment wheel
         visualise.sentiment_wheel(name_tweet_score,3)
     elif data_visualisation == '2':
+        # creating sentiment over time
         visualise.sentiment_over_time(name_tweet_score)
     elif data_visualisation == '3':
+        # sort by user score
         visualise.user_ranking(name_tweet_score)
+
 
 
 
