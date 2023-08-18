@@ -1,7 +1,6 @@
 import wx
 from sentiment_analyzer import SentimentAnalyzer as sa
 from sentiment_analyzer import Tools
-from visualisation import visualise
 import pandas as pd
 
 """ Objective: Add all data in the format (username: "", tweet: "", score: <int>) to file_with_scores.csv
@@ -39,7 +38,7 @@ def main():
         name_tweet_score = name_tweet_score[name_tweet_score["Tweet"].str.contains(keyword, case=False)]
 
     # visualisation
-    visualise.sentiment_over_time(name_tweet_score)
+    sa.visualise(name_tweet_score)
 
 
 if __name__ == "__main__":

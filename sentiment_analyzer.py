@@ -7,12 +7,12 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from nltk.tokenize import sent_tokenize, word_tokenize  # tokenize
 from nltk.corpus import stopwords  # stopwords
 from nltk.stem import WordNetLemmatizer  # lemmatizer
+import matplotlib.pyplot as plt
 
 # Definitions
 sia = SentimentIntensityAnalyzer()
 stop_words = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
-
 
 class Tools:
     # formats the tweets from a list to a sentence without links
@@ -30,13 +30,6 @@ class Tools:
     def string_to_datetime(date_string):
         date_obj = pd.to_datetime(date_string, format="%B %d, %Y at %I:%M%p").date()
         return date_obj
-
-    # filters the dataframe where only tweets that include a certain keyword will be put in the dataf
-    @staticmethod
-    def keyword_filter(df,keyword):
-
-        filtered_df  = df
-        return filtered_df
 
 
 class SentimentAnalyzer(Tools):
@@ -57,3 +50,20 @@ class SentimentAnalyzer(Tools):
         # sentiment analyzer using the polarity_scores method
         polarity_scores = sia.polarity_scores(formatted_tweet)
         return polarity_scores['compound']  # only returns the overall score of the tweet
+
+    @staticmethod
+    def visualise(df):
+        # sentiment per month
+        df.index = pd.to_datetime(df.index)
+        grouped_data = df['Score'].resample('M')
+        monthly_avg = grouped_data.mean()
+
+        # creating dataframe containing all the month/year combinations that appear in the code
+        # [1] indexing due to each element containing a Timestamp and the compound score
+        mean_sentiment_per_month = {'Months': [value[0].strftime('%Y-%m') for value in monthly_avg.items()],
+                                    'Average Sentiment': [value[1] for value in monthly_avg.items()]}
+
+        plt_data = pd.DataFrame(mean_sentiment_per_month)
+        ax = plt_data.plot.scatter(x='Months', y='Average Sentiment')
+        plt.xticks(rotation=90)
+        plt.show()
