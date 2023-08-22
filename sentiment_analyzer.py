@@ -51,19 +51,4 @@ class SentimentAnalyzer(Tools):
         polarity_scores = sia.polarity_scores(formatted_tweet)
         return polarity_scores['compound']  # only returns the overall score of the tweet
 
-    @staticmethod
-    def visualise(df):
-        # sentiment per month
-        df.index = pd.to_datetime(df.index)
-        grouped_data = df['Score'].resample('M')
-        monthly_avg = grouped_data.mean()
 
-        # creating dataframe containing all the month/year combinations that appear in the code
-        # [1] indexing due to each element containing a Timestamp and the compound score
-        mean_sentiment_per_month = {'Months': [value[0].strftime('%Y-%m') for value in monthly_avg.items()],
-                                    'Average Sentiment': [value[1] for value in monthly_avg.items()]}
-
-        plt_data = pd.DataFrame(mean_sentiment_per_month)
-        ax = plt_data.plot.scatter(x='Months', y='Average Sentiment')
-        plt.xticks(rotation=90)
-        plt.show()

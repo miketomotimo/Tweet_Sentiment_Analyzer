@@ -2,6 +2,7 @@ import wx
 from sentiment_analyzer import SentimentAnalyzer as sa
 from sentiment_analyzer import Tools
 import pandas as pd
+from GUI import MainFrame
 
 """ Objective: Add all data in the format (username: "", tweet: "", score: <int>) to file_with_scores.csv
 Steps:
@@ -32,16 +33,12 @@ def main():
 
     name_tweet_score = name_tweet_score.dropna(subset=['Tweet'])
 
-    # keyword filter
-    keyword = input("Enter a keyword: ")
-    if keyword:
-        name_tweet_score = name_tweet_score[name_tweet_score["Tweet"].str.contains(keyword, case=False)]
-
-    # visualisation
-    sa.visualise(name_tweet_score)
+    # GUI
+    app = wx.App()
+    Frame = MainFrame(None,name_tweet_score)
+    Frame.Show()
+    app.MainLoop()
 
 
 if __name__ == "__main__":
-    # nltk.download('vader_lexicon')
-    # nltk.download('wordnet')
     main()
