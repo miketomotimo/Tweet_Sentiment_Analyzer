@@ -4,19 +4,6 @@ from sentiment_analyzer import Tools
 import pandas as pd
 from GUI import MainFrame
 
-""" Objective: Add all data in the format (username: "", tweet: "", score: <int>) to file_with_scores.csv
-Steps:
-1. create a loop that goes through each tweet individually
-    a. Loop will work like this:
-    b. df["UserName"] = favourite_tweets["UserName"] <- This works!
-    c. df["Tweet"] = favourite_tweets["Tweet"]
-    d. 
-2. sentiment analysis for each tweet, create a list of [UserName, Tweet, Score]
-3. add the list to another list looks like this: [[UserName, Tweet, Score], [UserName, Tweet, Score]]
-4. add all of that to a dataframe
-"""
-
-
 def main():
     try:
         # reads the favorite tweets csv
