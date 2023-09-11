@@ -104,7 +104,6 @@ class MainFrame(wx.Frame):
 
     def KeywordFilter(self, keyword, arg2=None):
         # listener function takes the dataframe and filters it, creating a new dataframe
-        # self.df = self.df.dropna(subset=["LName"]) # drop NaN
         self.filtered_df = self.df
 
         if keyword:
@@ -135,8 +134,8 @@ class MainFrame(wx.Frame):
         column_names = self.filtered_df.columns.tolist()  # gets name of df columns
 
         # change size of columns
-        self.panel_two.grid.SetColSize(0, 200)  # change size of Fname column
-        self.panel_two.grid.SetColSize(1, 700)  # change size of Lname column
+        self.panel_two.grid.SetColSize(0, 200)  # change size of Username column
+        self.panel_two.grid.SetColSize(1, 700)  # change size of Tweet column
 
         # makes table columns names same as df columns
         for col in range(column_length):
