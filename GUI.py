@@ -88,16 +88,10 @@ class MainFrame(wx.Frame):
             pub.sendMessage("infotransfer", keyword=content)
 
             # swap panels
-            self.SetTitle("Panel Two Showing")
             self.panel_one.Hide()
             self.panel_two.Show()
         else:
-            # destroy and recreate grid
-            # self.panel_two.grid.Destroy()
-            # self.panel_two.grid = gridlib.Grid(self.panel_two)
-            # self.panel_two.sizer.Add(self.panel_two.grid, 1, wx.EXPAND)
             # swap panels
-            self.SetTitle("Panel One Showing")
             self.panel_two.Hide()
             self.panel_one.Show()
         self.Layout()
@@ -135,7 +129,7 @@ class MainFrame(wx.Frame):
 
         # change size of columns
         self.panel_two.grid.SetColSize(0, 200)  # change size of Username column
-        self.panel_two.grid.SetColSize(1, 700)  # change size of Tweet column
+        self.panel_two.grid.SetColSize(1, 1160)  # change size of Tweet column
 
         # makes table columns names same as df columns
         for col in range(column_length):
